@@ -1,5 +1,5 @@
 import csv
-import datetime # буду использовать для считывания формата даты
+# import datetime # буду использовать для считывания формата даты
 
 FILENAME = "202003-capitalbikeshare-tripdata.csv"
 
@@ -16,12 +16,22 @@ class Trip:
    member_type = ''
 
    trips = [] # массив объектов
+   bikes=0 # счётчик байков
 
    def __init__(self): # конструктор
      pass
 
-   def get_bike(self):
-      return self.bike_number
+   @staticmethod
+   def trips_number():
+      trips_number = len(Trip.trips)
+      return trips_number
+
+   @staticmethod
+   def bikes_number():
+      for i in range(len(Trip.trips) - 1):
+         if (Trip.trips[i].bike_number != Trip.trips[i + 1].bike_number):
+            Trip.bikes += 1
+      return Trip.bikes
 
 with open(FILENAME, "r", newline="") as csvfile:
    reader = csv.DictReader(csvfile, delimiter=',')
@@ -39,13 +49,10 @@ with open(FILENAME, "r", newline="") as csvfile:
       print(t)                                     # УДАЛИТЬ ПОТОМ!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       Trip.trips.append(t)
 
-trips_number = len(Trip.trips)
-
 with open('general-stats.csv', "a", newline="") as csvfile:
-      writer = csv.writer(csvfile, delimiter=' ') # delimiter - это разделитель, по умолчанию была бы запятая, но она не нужна
-      writer.writerow(['Количество поездок = ', trips_number]) #  3 ЗАДАНИЕ_1 ЧАСТЬ
-
-
+     writer = csv.writer(csvfile, delimiter=' ') # delimiter - это разделитель, по умолчанию была бы запятая, но она не нужна
+     writer.writerow(['Количество поездок = ', Trip.trips_number()]) #  3 ЗАДАНИЕ_1 ЧАСТЬ
+     writer.writerow(['Количество велосипедов за первый квартал = ', Trip.bikes_number()]) #  3 ЗАДАНИЕ_3 ЧАСТЬ
 
 
 
