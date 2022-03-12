@@ -23,12 +23,11 @@ class TripData: # main class with data read from csv file
 
 
 class FileReader:
-   filename = ''
 
    def __init__(self, filename):
       self.filename = filename
 
-   def reader(self):
+   def file_read(self):
       with open(self.filename, "r", newline="") as csvfile:
          reader = csv.DictReader(csvfile, delimiter=',')
          for row in reader:  # reading data from file into Trip's objects
@@ -47,13 +46,17 @@ class FileReader:
             print(t)  # DELETE LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!!
             TripData.trips.append(t)
 
-#class ResultSaver(TripData): # class for saving processed data in final files
+class ResultSaver: # class for saving processed data in final files
 
-#   with open('general-stats.csv', "a", newline="") as csvfile:
-#      writer = csv.writer(csvfile, delimiter=' ')
-#      writer.writerow(['Количество поездок = ', trips_number])  # 3 task part a
-#      writer.writerow(["Время самой продолжительной поездки = ", longest_trip])  # 3 task part b
-#      writer.writerow(['Количество велосипедов за первый квартал = ', Trip.bikes])  # 3 task part c
+   def __init__(self, filename, statement, result):
+      self.filename = filename
+      self.statement = statement
+      self.result = result
+
+   def file_write(self):
+      with open(self.filename, "a", newline="") as csvfile:
+         writer = csv.writer(csvfile, delimiter=' ')
+         writer.writerow([self.statement, self.result])
 
 class MonthlyFileReader:
    pass
