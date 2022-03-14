@@ -28,12 +28,12 @@ class FileReader:
       rows = []                           # and number of errors while reading a file
       unprocessed_counter = 0
 
-      with open(self.filename, "r", newline="") as csvfile:
+      with open(self.filename, "r") as csvfile:
          reader = csv.DictReader(csvfile, delimiter=',')
          for row in reader:  # reading data from file into Trip's objects
             try:
                t = TripData()
-               t.duration = int(row['Duration'])
+               t.duration = int(row.get('Duration'))
                t.start_date = datetime.datetime.strptime(row.get('Start date'), "%Y-%m-%d %H:%M:%S") # !!!!!!!!!!!!!!!!! WRITE METHOD FOR FORMATTING TYPES
                t.end_date = datetime.datetime.strptime(row.get('End date'), "%Y-%m-%d %H:%M:%S")
                t.start_st_number = int(row.get('Start station number'))
@@ -46,7 +46,7 @@ class FileReader:
                print(t)  # DELETE LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!!
                rows.append(t)
 
-            except(TypeError, ValueError): # if some errors happen, we will count them
+            except(TypeError, ValueError, KeyError): # if some errors happen, we will count them
                unprocessed_counter += 1
                print(f'Ошибка чтения в файле {self.filename}')
 
