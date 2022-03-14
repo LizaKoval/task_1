@@ -31,7 +31,7 @@ class DataServices:
 
         tittles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count', 'Unprocessed Rows Count']
 
-        self.save_to_csv('general-stats.cvs',
+        self.save_to_csv('general-stats.csv',
                          tittles,
                          general_stats,
                          )
@@ -41,9 +41,9 @@ class DataServices:
 
     def get_max_trip_time(self, trips):
         model_trip = trips[0]
-        trip_time = reduce(lambda x, trip: max(x, trip.end_date - trip.start_date), trips[1:], model_trip.end_date - model_trip.start_date) # выполнение лямбда функции(нахождение максимального)
-        return trip_time # между x и trip.end - trip.start в trips, где х - model_trip.end_date - model_trip.start_date
-                         # и найденное макс значение поездки аккумулируется
+        trip_time = reduce(lambda x, trip: max(x, trip.end_date - trip.start_date), trips[1:], model_trip.end_date - model_trip.start_date) # finding max value of trip duration
+        return str(trip_time) # between x & trip.end - trip.start в trips, where х = model_trip.end_date - model_trip.start_date
+                         # and found maximal value accumulates
 
     def get_bikes_amount(self, trips):
         bikes_set = set()
