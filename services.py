@@ -1,4 +1,5 @@
 import csv
+from functools import reduce
 from typing import List
 
 from trip_data import TripData
@@ -7,14 +8,17 @@ from trip_data import FileReader
 
 class DataServices:
     all_trips: List[TripData]# for processing several files i use one big list for FileReader objects
-    unprocessed_lines = 0
+    unprocessed_count: int = 0
 
-    def __init__(self, data_reader: List[FileReader]):
+    def __init__(self, data_readers: List[FileReader]) -> None:
         self.all_trips = []
-        self.read_data(data_reader)
+        self.get_data_from_readers(data_readers)
 
-    def read_data(self, data_reader: List[FileReader]):
-        self.all_trips, self.unprocessed_lines = data_reader.file_read()
+    def get_data_from_readers(self, data_readers: List[FileReader]):
+        for reader in data_readers:
+            all_trips, unprocessed_count = reader.file_read()
+            self.all_trips.extend(all_trips)
+            self.unprocessed_count += unprocessed_count
 
     def generate_general_stats(self):
         general_stats = []
@@ -23,24 +27,23 @@ class DataServices:
         max_trip_time = self.get_max_trip_time(self.all_trips)
         bikes_amount = self.get_bikes_amount(self.all_trips)
 
-        general_stats.append([trips_amount, max_trip_time, bikes_amount,])
+        general_stats.append([trips_amount, max_trip_time, bikes_amount, self.unprocessed_count])
+
+        tittles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count', 'Unprocessed Rows Count']
 
         self.save_to_csv('general-stats.cvs',
-                         ['Total Trip Count', 'Max Trip Time', 'Total Bike Count', 'Unprocessed Rows Count'],
+                         tittles,
                          general_stats,
                          )
-
 
     def get_general_trips_amount(self, trips):
         return len(trips)
 
     def get_max_trip_time(self, trips):
-        max = trips[0].duration
-        for i in trips: # range(len(trips) - 1):
-          if trips[i].trip_duration > max:
-             max = trips[i].trip_duration
-        print(f'Самая продолжительная поездка: {max}')
-        return max
+        model_trip = trips[0]
+        trip_time = reduce(lambda x, trip: max(x, trip.end_date - trip.start_date), trips[1:], model_trip.end_date - model_trip.start_date) # выполнение лямбда функции(нахождение максимального)
+        return trip_time # между x и trip.end - trip.start в trips, где х - model_trip.end_date - model_trip.start_date
+                         # и найденное макс значение поездки аккумулируется
 
     def get_bikes_amount(self, trips):
         bikes_set = set()
@@ -48,8 +51,8 @@ class DataServices:
             bikes_set.add(trip.bike_number)
         return len(bikes_set)
 
-    def save_to_csv(self, filename, tittles, rows: List[str]):
+    def save_to_csv(self, filename, header: List[str], rows: List[str]):
         with open(filename,'w', newline="") as csv_file:
-            writer = csv.writer(csv_file, delimiter=" ", fieldnames=tittles)
-            writer.writeheader()
+            writer = csv.writer(csv_file, delimiter=" ")
+            writer.writerow(header)
             writer.writerow(rows)

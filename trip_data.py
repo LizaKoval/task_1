@@ -1,7 +1,9 @@
 import csv
 import datetime # used for dates
+from dataclasses import dataclass
 from typing import List
 
+@dataclass
 class TripData: # main class with data read from csv file
 
    duration: int
