@@ -1,5 +1,6 @@
 import csv
 from functools import reduce
+# from functools import filter
 from typing import List
 
 from trip_data import TripData
@@ -55,4 +56,25 @@ class DataServices:
         with open(filename,'w', newline="") as csv_file:
             writer = csv.writer(csv_file, delimiter=" ")
             writer.writerow(header)
-            writer.writerow(rows)
+            writer.writerows(rows)
+
+    def generate_usage_stats(self):
+        months = {trip.start_date.month for trip in self.all_trips}
+        monthly_stats = []
+        tittles = ['Month', 'Trips amount']
+
+        for month in months:
+            month_trips = list(self.get_trips_per_month(self.all_trips, month)) # extracting all trips made for the month
+            total_amount_of_trips_in_month = self.get_general_trips_amount(month_trips)
+            monthly_stats.append([month, total_amount_of_trips_in_month])
+
+        self.save_to_csv("usage-stats.csv", tittles, monthly_stats)
+
+    def get_trips_per_month(self, all_trips, month):
+        required_trips = []
+        for trip in all_trips:
+            if trip.start_date.month == month:
+                required_trips.append(trip)
+    # TODO: try to do THIS METHOD BY using filter() and lambda()
+        # required_trips = list(filter(lambda trip, month: trip.start_date.month == month, all_trips, month)
+        return required_trips
