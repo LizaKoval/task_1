@@ -4,7 +4,7 @@ from functools import reduce
 from typing import List
 
 from trip_data import TripData
-from trip_data import FileReader
+from trip_data_reader import FileReader
 
 
 class DataServices:
@@ -20,10 +20,10 @@ class DataServices:
             all_trips, unprocessed_count = reader.file_read()
             self.all_trips.extend(all_trips)
             self.unprocessed_count += unprocessed_count
+        return self.all_trips, self.unprocessed_count
 
     def generate_general_stats(self):
         general_stats = []
-
         trips_amount = self.get_general_trips_amount(self.all_trips)
         max_trip_time = self.get_max_trip_time(self.all_trips)
         bikes_amount = self.get_bikes_amount(self.all_trips)
@@ -32,7 +32,7 @@ class DataServices:
 
         tittles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count', 'Unprocessed Rows Count']
 
-        self.save_to_csv('general-stats.csv',
+        self.save_to_csv('output/general-stats.csv',
                          tittles,
                          general_stats,
                          )
@@ -54,7 +54,7 @@ class DataServices:
 
     def save_to_csv(self, filename, header: List[str], rows: List[str]):
         with open(filename,'w', newline="") as csv_file:
-            writer = csv.writer(csv_file, delimiter=" ")
+            writer = csv.writer(csv_file, delimiter=",")
             writer.writerow(header)
             writer.writerows(rows)
 
@@ -64,17 +64,29 @@ class DataServices:
         tittles = ['Month', 'Trips amount']
 
         for month in months:
-            month_trips = list(self.get_trips_per_month(self.all_trips, month)) # extracting all trips made for the month
+            month_trips = list(filter(lambda trip: trip.start_date.month == month, self.all_trips)) # extracting all trips made for the month
             total_amount_of_trips_in_month = self.get_general_trips_amount(month_trips)
             monthly_stats.append([month, total_amount_of_trips_in_month])
 
-        self.save_to_csv("usage-stats.csv", tittles, monthly_stats)
+        self.save_to_csv("output/usage-stats.csv", tittles, monthly_stats)
 
-    def get_trips_per_month(self, all_trips, month):
-        required_trips = []
-        for trip in all_trips:
-            if trip.start_date.month == month:
-                required_trips.append(trip)
-    # TODO: try to do THIS METHOD BY using filter() and lambda()
-        # required_trips = list(filter(lambda trip, month: trip.start_date.month == month, all_trips, month)
-        return required_trips
+    def generate_bike_stats(self):
+        bikes = {trip.bike_number for trip in self.all_trips} # made the set of unique bikes
+        bikes_stats = []
+        tittles = ['Total of trips', 'Term of use', 'Bike number']
+
+        for bike in bikes:
+            bike_trips = list(filter(lambda trip: trip.bike_number == bike, self.all_trips)) # all trips list made by 1 particular bike
+            total_bike_trips_amount = self.get_general_trips_amount(bike_trips)
+            bike_term_of_use = self.get_time_of_all_bike_trips(bike_trips)
+            bikes_stats.append([total_bike_trips_amount,bike_term_of_use, bike])
+
+        sorted_bike_stats = sorted(bikes_stats, key=lambda x: x[0], reverse=True)
+
+        self.save_to_csv('output/bike-stats.csv', tittles, sorted_bike_stats)
+
+    def get_time_of_all_bike_trips(self, bike_trips): # returns term of use of particular bike
+        model_trip = bike_trips[0]
+        term_of_use = reduce(lambda x, trip: x + (trip.end_date-trip.start_date), bike_trips[:1], model_trip.end_date - model_trip.start_date)
+        return term_of_use
+

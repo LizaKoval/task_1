@@ -1,0 +1,15 @@
+/shelf/
+/workspace.xml
+
+*.log
+*.iml
+*.ipr
+*.iws
+.idea
+.git
+*.class
+__pycache__
+
+#folders
+input_data
+output
