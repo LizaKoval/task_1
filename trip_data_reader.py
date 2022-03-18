@@ -29,7 +29,6 @@ class FileReader:
                t.bike_number = row.get('Bike number')
                t.member_type = row.get('Member type')
                t.trip_duration = t.end_date - t.start_date
-               print(t)  # TODO: DELETE LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!!
                rows.append(t)
 
             except(TypeError, ValueError, KeyError): # if some errors happen, we will count them in unprocessed_counter
