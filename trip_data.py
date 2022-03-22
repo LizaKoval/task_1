@@ -1,7 +1,7 @@
 import datetime # used for dates
 from dataclasses import dataclass
 
-@dataclass
+@dataclass #class with data structure
 class TripData: # main class with data read from csv file
 
    duration: int
