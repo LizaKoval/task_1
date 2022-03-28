@@ -1,8 +1,8 @@
 from functools import reduce
-from services import DataServices
+from services import DataService
 
-class UsageStatsCreator(DataServices):
-    tittles = ['Month', 'Trips amount']
+class UsageStatsCreator(DataService):
+    titles = ['Month', 'Trips amount']
     stats = []
 
     def __init__(self, obj):

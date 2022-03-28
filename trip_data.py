@@ -1,11 +1,11 @@
-import datetime # used for dates
 from dataclasses import dataclass
+from datetime import datetime
 
-@dataclass #class with data structure
-class TripData: # main class with data read from csv file
 
+@dataclass
+class TripData:
    duration: int
-   start_date: datetime # special format for dates and time
+   start_date: datetime
    end_date: datetime
    start_st_number: int
    start_station: str
@@ -13,6 +13,3 @@ class TripData: # main class with data read from csv file
    end_station: str
    bike_number: str
    member_type: str
-
-   def __init__(self): # builder
-      pass

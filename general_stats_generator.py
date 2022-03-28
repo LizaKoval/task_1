@@ -1,9 +1,9 @@
 from functools import reduce
-from services import DataServices
+from services import DataService
 
-class GeneralStatsCreator(DataServices):
-    tittles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count',
-               'Unprocessed Rows Count']  # for output file header
+class GeneralStatsCreator(DataService):
+    titles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count',
+              'Unprocessed Rows Count']# for output file header
     stats = []
 
     def __init__(self, obj):
