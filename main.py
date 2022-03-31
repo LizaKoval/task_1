@@ -19,8 +19,8 @@ stats = [
     { "obj": usage_stats, "filename": "output/usage-stats.csv"},
     { "obj": bike_stats, "filename": "output/bike-stats.csv"}
 ]
-size_of_stats = len(stats)
-stats_written = map(lambda stats_obj, x=0: FileWriter(stats_obj[x]['filename'], stats_obj[x]['obj']), size_of_stats, stats)
+
+stats_written = map(lambda stats_obj, x: FileWriter(stats_obj[x]['filename'], stats_obj[x]['obj']), range(0,len(stats)), stats)
 
 #general_stats_file = FileWriter('output/general-stats.csv', general_stats_creation)
 
