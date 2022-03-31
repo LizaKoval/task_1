@@ -1,16 +1,17 @@
 from functools import reduce
+from abstractstatsservice import StatsGenerator
 from services import DataService
 
-class BikeStatsCreator(DataService):
+class BikeStatsCreator(DataService, StatsGenerator):
     titles = ['Total of trips', 'Term of use', 'Bike number']
     stats = [] # processed bike statistics
 
     def __init__(self, obj):
         self.all_trips = obj.all_trips
-        bikes_stats = self.gather_bike_stats() # not sorted processed bike statistics
+        bikes_stats = self.gather_stats() # not sorted processed bike statistics
         self.stats = self.sort_data(bikes_stats)
 
-    def gather_bike_stats(self):
+    def gather_stats(self):
         bikes = {trip.bike_number for trip in self.all_trips}  # made the set of unique bikes
         bike_stats = []
         for bike in bikes:

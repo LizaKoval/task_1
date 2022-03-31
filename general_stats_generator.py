@@ -1,7 +1,8 @@
 from functools import reduce
+from abstractstatsservice import StatsGenerator
 from services import DataService
 
-class GeneralStatsCreator(DataService):
+class GeneralStatsCreator(DataService, StatsGenerator):
     titles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count',
               'Unprocessed Rows Count']# for output file header
     stats = []

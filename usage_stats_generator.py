@@ -1,15 +1,16 @@
 from functools import reduce
+from abstractstatsservice import StatsGenerator
 from services import DataService
 
-class UsageStatsCreator(DataService):
+class UsageStatsCreator(DataService,StatsGenerator):
     titles = ['Month', 'Trips amount']
     stats = []
 
     def __init__(self, obj):
         self.all_trips = obj.all_trips
-        self.gather_usage_stats()
+        self.gather_stats()
 
-    def gather_usage_stats(self):
+    def gather_stats(self):
         months = {trip.start_date.month for trip in self.all_trips}
 
         for month in months:
