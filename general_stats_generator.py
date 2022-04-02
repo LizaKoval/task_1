@@ -1,18 +1,15 @@
 from functools import reduce
 from abstractstatsservice import StatsGenerator
-from services import DataService
 
-class GeneralStatsCreator(DataService, StatsGenerator):
-    titles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count',
-              'Unprocessed Rows Count']# for output file header
-    stats = []
+class GeneralStatsCreator(StatsGenerator):
+    # titles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count',
+    #           'Unprocessed Rows Count']# for output file header
+    # stats = []
 
-    def __init__(self, obj):
-        self.all_trips = obj.all_trips
-        self.unprocessed_count = obj.unprocessed_count
-        self.gather_stats()
+    def __init__(self, ):
 
-    def gather_stats(self):
+
+    def get_stats(self):
         trips_amount = self.get_general_trips_amount(self.all_trips)
         max_trip_time = self.get_max_trip_time(self.all_trips)
         bikes_amount = self.get_bikes_amount(self.all_trips)

@@ -5,14 +5,13 @@ from trip_data import TripData
 
 
 class FileReader:
-    filename = None
 
     def __init__(self, filename) -> None:
         self.filename = filename
+        self.unprocessed_count = 0
 
     def read(self) -> List[TripData]:
         rows = []
-        unprocessed_count = 0
         with open(self.filename, 'r') as f:
             reader = csv.DictReader(f, delimiter=',')
             for row in reader:
@@ -30,8 +29,11 @@ class FileReader:
                     )
                     rows.append(td)
                 except (ValueError, TypeError, KeyError):
-                    unprocessed_count += 1
-        return rows, unprocessed_count
+                    self.unprocessed_count += 1
+        return rows
+
+    def get_unprocessed_data(self):
+        return self.unprocessed_count
 
 def to_date(date_string):
     return datetime.datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S')

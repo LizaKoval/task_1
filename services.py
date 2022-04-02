@@ -22,8 +22,5 @@ class DataService:
             self.unprocessed_count += unprocessed_count
         return self.all_trips, self.unprocessed_count
 
-    #TODO: DELETE IT LATER def get_general_trips_amount(self, trips): # used by daughter classes
-       # return len(trips)
-
 
 
