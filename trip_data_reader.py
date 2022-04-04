@@ -29,7 +29,9 @@ class FileReader:
                     )
                     rows.append(td)
                 except (ValueError, TypeError, KeyError):
+                    # TODO: открыть стр.34
                     self.unprocessed_count += 1
+                    # print("Ошибка чтения файлов")
         return rows
 
     def get_unprocessed_data(self):

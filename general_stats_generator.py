@@ -1,20 +1,23 @@
 from functools import reduce
 from abstractstatsservice import StatsGenerator
+from general_stats_storage import GeneralStats
 
 class GeneralStatsCreator(StatsGenerator):
     # titles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count',
     #           'Unprocessed Rows Count']# for output file header
     # stats = []
 
-    def __init__(self, ):
+    def __init__(self):
+        pass
 
+    def get_stats(self, trips, unprocessed_data_amount) -> GeneralStats:
+        trips_amount = self.get_general_trips_amount(trips)
+        max_trip_time = self.get_max_trip_time(trips)
+        bikes_amount = self.get_bikes_amount(trips)
 
-    def get_stats(self):
-        trips_amount = self.get_general_trips_amount(self.all_trips)
-        max_trip_time = self.get_max_trip_time(self.all_trips)
-        bikes_amount = self.get_bikes_amount(self.all_trips)
-
-        self.stats.append([trips_amount, max_trip_time, bikes_amount, self.unprocessed_count])
+        general_stats_obj = GeneralStats(trips_amount, max_trip_time, bikes_amount, unprocessed_data_amount)
+        print("gen_stats is generated")
+        return general_stats_obj
 
     def get_max_trip_time(self, trips):
         model_trip = trips[0]
