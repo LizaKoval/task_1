@@ -9,8 +9,8 @@ from write_in_file import GeneralStatsWriter, UsageStatsWriter, BikeStatsWriter
 class Factory:
     writers = {
         GeneralStats: GeneralStatsWriter('output/general-stats.csv'),
-        List[UsageStats]: UsageStatsWriter("output/usage-stats.csv"),
-        List[BikeStats]: BikeStatsWriter("output/bike-stats.csv")
+        UsageStats: UsageStatsWriter("output/usage-stats.csv"),
+        BikeStats: BikeStatsWriter("output/bike-stats.csv")
     }
 
     def get_writer(self, obj):

@@ -7,16 +7,18 @@ from usage_stats_storage import UsageStats
 
 
 class Writer(ABC):
-    def __init__(self, filename):
-        self.filename = filename
+    # def __init__(self, filename):
+    #     self.filename = filename
 
     @abstractmethod
     def write(self, obj):
         pass
 
 class GeneralStatsWriter(Writer):
+    #     def __init__(self, filename):
+    #         super().__init__(filename)
     def __init__(self, filename):
-        super().__init__(filename)
+        self.filename = filename
 
     def write(self, obj):
         titles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count', 'Unprocessed Rows Count']
@@ -24,24 +26,34 @@ class GeneralStatsWriter(Writer):
         with open(self.filename,'w', newline="") as csv_file:
             writer = csv.writer(csv_file, delimiter=",")
             writer.writerow(titles)
-            writer.writerow(list[obj.trips_amount, obj.max_trip_time, obj.bikes_amount, obj.unprocessed_count])
+            writer.writerow([obj.trips_amount, obj.max_trip_time, obj.bikes_amount, obj.unprocessed_count])
 
-class UsageStatsWriter(Writer):
+class ListUsageStatsWriter(Writer):
     def __init__(self, filename):
-        super().__init__(filename)
-
-    def write(self, objects: List[UsageStats]):
+        self.filename = filename
+    def write(self, list_of_obj):
         titles = ['Month', 'Trips amount']
-
+        stats_obj_list = list_of_obj
         with open(self.filename, 'w', newline="") as csv_file:
             writer = csv.writer(csv_file, delimiter=",")
             writer.writerow(titles)
-            for obj in objects:
-                writer.writerow(list[obj.month, obj.bikes_amount])
+            for obj in stats_obj_list:
+                file_writer = UsageStatsWriter(self.filename)
+                file_writer.write(obj)
+
+
+class UsageStatsWriter(Writer):
+    def __init__(self, filename):
+        self.filename = filename
+
+    def write(self, obj):
+        with open(self.filename, 'a', newline="") as csv_file:
+            writer = csv.writer(csv_file, delimiter=",")
+            writer.writerow(list[obj.month, obj.bikes_amount])
 
 class BikeStatsWriter(Writer):
     def __init__(self, filename):
-        super().__init__(filename)
+        self.filename = filename
 
     def write(self, objects: List[BikeStats]):
         titles = ['Total of trips', 'Term of use', 'Bike number']
