@@ -23,8 +23,7 @@ class GeneralStatsCreator(StatsGenerator):
         model_trip = trips[0]
         trip_time = reduce(lambda x, trip: max(x, trip.end_date - trip.start_date), trips[1:],
                            model_trip.end_date - model_trip.start_date)  # finding max value of trip duration
-        return str(
-            trip_time)  # between x & trip.end - trip.start в trips, where х = model_trip.end_date - model_trip.start_date
+        return trip_time  # between x & trip.end - trip.start в trips, where х = model_trip.end_date - model_trip.start_date
         # and found maximal value accumulates
 
     def get_bikes_amount(self, trips):
