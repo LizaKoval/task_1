@@ -5,7 +5,6 @@ from bike_stats_storage import BikeStats
 from bike_stats_storage import BikeStat
 
 class BikeStatsCreator(StatsGenerator):
-    # titles = ['Total of trips', 'Term of use', 'Bike number']
     def __init__(self):
         pass
 

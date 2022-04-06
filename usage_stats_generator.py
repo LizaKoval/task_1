@@ -5,9 +5,6 @@ from usage_stats_storage import UsageStat
 
 
 class UsageStatsCreator(StatsGenerator):
-    # titles = ['Month', 'Trips amount']
-    # stats = []
-
     def __init__(self):
         pass
 

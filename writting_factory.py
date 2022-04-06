@@ -1,5 +1,4 @@
 from typing import List
-
 from bike_stats_storage import BikeStats
 from general_stats_storage import GeneralStats
 from usage_stats_storage import UsageStats

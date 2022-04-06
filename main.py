@@ -15,15 +15,5 @@ stats_storage = list(map(lambda x: x.get_stats(trips, unprocessed_raw_data), gen
 stats_factory = Factory()
 stats_factory_written_result = list(map(lambda x: stats_factory.get_writer(x).write(x), stats_storage))
 
-#gen = GeneralStatsCreator()
-#us = UsageStatsCreator()
-#bs = BikeStatsCreator()
-# gs_stats = gen.get_stats(trips, unprocessed_raw_data)
-# us_stats = us.get_stats(trips, unprocessed_raw_data)
-# bs_stats = bs.get_stats(trips, unprocessed_raw_data)
 
-# stats_factory = Factory()
-# stats_factory_written_result = stats_factory.get_writer(gs_stats).write(gs_stats)
-# stats_factory_written_result = stats_factory.get_writer(us_stats).write(us_stats)
-# stats_factory_written_result = stats_factory.get_writer(bs_stats).write(bs_stats)
 

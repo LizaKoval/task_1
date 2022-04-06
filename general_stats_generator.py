@@ -3,10 +3,6 @@ from abstractstatsservice import StatsGenerator
 from general_stats_storage import GeneralStats
 
 class GeneralStatsCreator(StatsGenerator):
-    # titles = ['Total Trip Count', 'Max Trip Time', 'Total Bike Count',
-    #           'Unprocessed Rows Count']# for output file header
-    # stats = []
-
     def __init__(self):
         pass
 
