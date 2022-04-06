@@ -13,5 +13,5 @@ class Factory:
         BikeStats: BikeStatsWriter("output/bike-stats.csv")
     }
 
-    def get_writer(self, obj):
+    def get_writer(self, obj) -> GeneralStatsWriter:
         return self.writers[type(obj)]

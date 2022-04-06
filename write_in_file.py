@@ -32,14 +32,15 @@ class UsageStatsWriter(Writer):
     def __init__(self, filename):
         self.filename = filename
 
-    def write(self, objects: List[UsageStats]):
+    def write(self, obj):
         titles = ['Month', 'Trips amount']
 
         with open(self.filename, 'w', newline="") as csv_file:
             writer = csv.writer(csv_file, delimiter=",")
             writer.writerow(titles)
-            for obj in objects:
-                writer.writerow(list[obj.month, obj.bikes_amount])
+            items = obj.stats
+            for item in items:
+                writer.writerow([item.month, item.bikes_amount])
 
 class BikeStatsWriter(Writer):
     def __init__(self, filename):
@@ -51,5 +52,6 @@ class BikeStatsWriter(Writer):
         with open(self.filename, 'w', newline="") as csv_file:
             writer = csv.writer(csv_file, delimiter=",")
             writer.writerow(titles)
-            for item in obj.stats:
+            items = obj.stats
+            for item in items:
                 writer.writerow([item.bikes_trips_amount, item.term_of_use, item.bike_number])
