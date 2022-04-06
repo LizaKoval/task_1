@@ -11,9 +11,9 @@ file_reader = FileReader('input_data/2014Q4-capitalbikeshare-tripdata.csv') # da
 trips = file_reader.read()
 unprocessed_raw_data = file_reader.get_unprocessed_data() # unprocessed data
 generators = [GeneralStatsCreator(), UsageStatsCreator(), BikeStatsCreator()] # objects generating statistics
-stats_storage = map(lambda x: x.get_stats(trips, unprocessed_raw_data), generators)
+stats_storage = list(map(lambda x: x.get_stats(trips, unprocessed_raw_data), generators))
 stats_factory = Factory()
-stats_factory_written_result = map(lambda x: stats_factory.get_writer(x).write(x), stats_storage)
+stats_factory_written_result = list(map(lambda x: stats_factory.get_writer(x).write(x), stats_storage))
 
 #gen = GeneralStatsCreator()
 #us = UsageStatsCreator()
