@@ -45,11 +45,11 @@ class BikeStatsWriter(Writer):
     def __init__(self, filename):
         self.filename = filename
 
-    def write(self, objects: List[BikeStats]):
+    def write(self, obj):
         titles = ['Total of trips', 'Term of use', 'Bike number']
 
         with open(self.filename, 'w', newline="") as csv_file:
             writer = csv.writer(csv_file, delimiter=",")
             writer.writerow(titles)
-            for obj in objects:
-                writer.writerow(list[obj.bikes_trips_amount, obj.term_of_use, obj.bike_number])
+            for item in obj.stats:
+                writer.writerow([item.bikes_trips_amount, item.term_of_use, item.bike_number])
