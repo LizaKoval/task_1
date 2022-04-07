@@ -1,8 +1,8 @@
 from functools import reduce
-from abstractstatsservice import StatsGenerator
-from general_stats_storage import GeneralStats
+from app.generators.abstractstatsservice import StatsGenerator
+from app.stats_storages.general_stats_storage import GeneralStats
 
-class GeneralStatsCreator(StatsGenerator):
+class GeneralStatsGenerator(StatsGenerator):
     def __init__(self):
         pass
 

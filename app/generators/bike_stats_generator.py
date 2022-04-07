@@ -1,14 +1,13 @@
 from functools import reduce
-from typing import List
-from abstractstatsservice import StatsGenerator
-from bike_stats_storage import BikeStats
-from bike_stats_storage import BikeStat
+from app.generators.abstractstatsservice import StatsGenerator
+from app.stats_storages.bike_stats_storage import BikeStats
+from app.stats_storages.bike_stats_storage import BikeStat
 
-class BikeStatsCreator(StatsGenerator):
+class BikeStatsGenerator(StatsGenerator):
     def __init__(self):
         pass
 
-    def get_stats(self, trips, _unprocessed_data_amount=0) -> List[BikeStats]: # unprocessed_data_amount=0 since in this part unprocessed data is not used
+    def get_stats(self, trips, _unprocessed_data_amount=0) -> BikeStats: # unprocessed_data_amount=0 since in this part unprocessed data is not used
         bikes = {trip.bike_number for trip in trips}  # made the set of unique bikes
         processed_stats = []
         for bike in bikes:

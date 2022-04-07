@@ -1,8 +1,7 @@
 import csv
-import datetime
 from typing import List
-from trip_data import TripData
-from trip_data import Date
+from app.data_readers.trip_data import TripData
+from app.data_readers.trip_data import Date
 
 
 class FileReader:

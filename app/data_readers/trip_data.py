@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from datetime import datetime
-from date import Date
+from app.data_readers.date import Date
+
 
 @dataclass() # class for storing data, and it has unseen default methods btw i can use __slots__ for storing fields and when executing it will let us use less store and give faster access to the fields
 class TripData:
