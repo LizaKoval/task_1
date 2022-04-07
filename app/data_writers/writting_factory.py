@@ -5,9 +5,9 @@ from app.data_writers.write_in_file import GeneralStatsWriter, UsageStatsWriter,
 
 class Factory:
     writers = {
-        GeneralStats: GeneralStatsWriter('app/data/output/general-stats.csv'),
-        UsageStats: UsageStatsWriter("app/data/output/usage-stats.csv"),
-        BikeStats: BikeStatsWriter("app/data/output/bike-stats.csv")
+        GeneralStats: GeneralStatsWriter('data/output/general-stats.csv'),
+        UsageStats: UsageStatsWriter("data/output/usage-stats.csv"),
+        BikeStats: BikeStatsWriter("data/output/bike-stats.csv")
     }
 
     def get_writer(self, obj) -> GeneralStatsWriter:

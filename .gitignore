@@ -9,7 +9,7 @@
 .git
 *.class
 __pycache__
-__init__
+
 
 #folders
 data/input_data
