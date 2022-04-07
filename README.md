@@ -7,6 +7,9 @@ HOW IT WORKS?
 2. then it parsers and processes it,
 3. afterwords 3 output csv files with folowing information below are generated. 
 
+![App_Scheme drawio](https://user-images.githubusercontent.com/63054459/162261138-1cdafb3b-7811-455c-9df5-09880d876e48.png)
+
+
 WHAT OUTPUT DATA I WILL GET?
 -------------------------------
 You are to get:
@@ -16,7 +19,6 @@ You are to get:
 - total of unprocessed data in input file
 *usage-stats.csv* provides you with some information about the total rides amount by month of the original data file.
 *bike-stats.csv* contains information about the number of trips and the time of use of each bike by decrease, based on the original data file.
-![App_Scheme drawio](https://user-images.githubusercontent.com/63054459/162260549-f2187153-cb54-4216-8028-2b05448c2257.png)
 
 WHICH INPUT FILES REQUIRED?
 ------------------------------
