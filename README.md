@@ -20,6 +20,7 @@ You are to get:
 - total of unprocessed data in input file
 
 *usage-stats.csv* provides you with some information about the total rides amount by month of the original data file.
+
 *bike-stats.csv* contains information about the number of trips and the time of use of each bike by decrease, based on the original data file.
 
 WHICH INPUT FILES REQUIRED?
