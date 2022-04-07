@@ -24,7 +24,7 @@ class BikeStatsCreator(StatsGenerator):
 
     def get_time_of_all_bike_trips(self, bike_trips): # returns term of use of particular bike
         model_trip = bike_trips[0]
-        term_of_use = reduce(lambda x, trip: x + (trip.end_date-trip.start_date), bike_trips[:1], model_trip.end_date - model_trip.start_date)
+        term_of_use = reduce(lambda x, trip: x + (trip.dates.end_date-trip.dates.start_date), bike_trips[:1], model_trip.dates.end_date - model_trip.dates.start_date)
         return term_of_use
 
     def sort_data(self, processed_bikes_list):

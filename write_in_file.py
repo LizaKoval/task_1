@@ -1,22 +1,15 @@
 from abc import ABC, abstractmethod
 import csv
 from typing import List
-
 from bike_stats_storage import BikeStats
 from usage_stats_storage import UsageStats
 
-
 class Writer(ABC):
-    # def __init__(self, filename):
-    #     self.filename = filename
-
     @abstractmethod
     def write(self, obj):
         pass
 
 class GeneralStatsWriter(Writer):
-    #     def __init__(self, filename):
-    #         super().__init__(filename)
     def __init__(self, filename):
         self.filename = filename
 

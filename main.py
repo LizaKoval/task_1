@@ -16,4 +16,3 @@ stats_factory = Factory()
 stats_factory_written_result = list(map(lambda x: stats_factory.get_writer(x).write(x), stats_storage))
 
 
-
