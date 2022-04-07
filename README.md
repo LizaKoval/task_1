@@ -13,6 +13,7 @@ HOW IT WORKS?
 WHAT OUTPUT DATA I WILL GET?
 -------------------------------
 You are to get:
+
 *general-stats.csv* file with general statistics for a particular period:
 - total trips amount
 - duration of the longest ride
