@@ -10,6 +10,7 @@
 *.class
 __pycache__
 
+
 #folders
-input_data
-output
+data/input_data
+data/output

@@ -1,14 +1,13 @@
-from typing import List
-from abstractstatsservice import StatsGenerator
-from usage_stats_storage import UsageStats
-from usage_stats_storage import UsageStat
+from app.generators.abstractstatsservice import StatsGenerator
+from app.stats_storages.usage_stats_storage import UsageStats
+from app.stats_storages.usage_stats_storage import UsageStat
 
 
-class UsageStatsCreator(StatsGenerator):
+class UsageStatsGenerator(StatsGenerator):
     def __init__(self):
         pass
 
-    def get_stats(self, trips, _unprocessed_data_amount=0) -> List[UsageStats]:
+    def get_stats(self, trips, _unprocessed_data_amount=0) -> UsageStats:
         months = {trip.dates.start_date.month for trip in trips}
         processed_stats = []
         for month in months:

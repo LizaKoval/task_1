@@ -1,5 +1,5 @@
 import datetime
-from stats_class import Stats
+from app.stats_storages.stats_class import Stats
 from dataclasses import dataclass
 
 @dataclass()
