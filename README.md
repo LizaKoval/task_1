@@ -36,6 +36,10 @@ Feel free to download data shared by capital bikeshare https://ride.capitalbikes
 
 *This data is provided according to the Capital Bikeshare Data License Agreement.*
 
+HOW TO LAUNCH THE APP?
+--------------------------------
+You chould clone the project and launch it from main.py file.
+
 HISTORY OF THE APP
 --------------------------------
 I built this app as my firststyding project in data engineering for my internship at iTechArt Group.
