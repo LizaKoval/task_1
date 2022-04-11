@@ -38,7 +38,7 @@ Feel free to download data shared by capital bikeshare https://ride.capitalbikes
 
 HOW TO LAUNCH THE APP?
 --------------------------------
-You chould clone the project and launch it from main.py file.
+You chould clone the project, download stats from  https://ride.capitalbikeshare.com/system-data csv files and put them in folder named *data/input_data* and create directory *data/output*. Here you go;)
 
 HISTORY OF THE APP
 --------------------------------
