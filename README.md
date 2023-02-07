@@ -1,4 +1,4 @@
-                                                                   City Bike
+                                                               City Bike
 This is a small project processing data of bike rides and making up statistics on data shared by Capital Bikeshare https://ride.capitalbikeshare.com/system-data - metro DC's bikeshare service, with 5,000 bikes and 600+ stations across 7 jurisdictions: Washington, DC.; Arlington, VA; Alexandria, VA; Montgomery, MD; Prince George's County, MD; Fairfax County, VA; and the City of Falls Church, VA for quick trips around town.
 
 HOW IT WORKS?
